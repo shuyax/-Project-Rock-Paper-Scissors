@@ -1,5 +1,3 @@
-//console.log("Hello World")
-
 function getComputerChoice(){
     let random_number = Math.floor(Math.random() * 10) % 3
     if (random_number === 0){
@@ -12,7 +10,6 @@ function getComputerChoice(){
         return 'Scissors'
     }
 }
-//console.log(getComputerChoice())
 
 function playRound(playerSelection, computerSelection) {
     computerSelection = computerSelection.toLowerCase()
@@ -35,38 +32,32 @@ function playRound(playerSelection, computerSelection) {
     
   }
   
-  //const playerSelection = "rock";
-  //const computerSelection = getComputerChoice();
-  //console.log(playRound(playerSelection, computerSelection));
 
-function playGame(){
-    round = 1
+// creates a new div referenced in the variable 'div'
+const container = document.querySelector('#container');
+
+// buttons is a node list. It looks and acts much like an array.
+const buttons = document.querySelectorAll('button');
+const score1 = document.createElement('div') 
+const score2 = document.createElement('div')
+// we use the .forEach method to iterate through each button
+buttons.forEach((button) => {
+  // and for each one we add a 'click' listener
     computer_score = 0
     player_score = 0
-    while (round < 6){
-        console.log('Round: ', round)
-        const playerSelection = prompt("Please enter your choice: (Rock or Paper or Scissors)")
+    button.addEventListener('click', () => {
         const computerSelection = getComputerChoice()
-        let result = playRound(playerSelection, computerSelection)
+        let result = playRound(button.id, computerSelection)
         if (result == 'playerWin'){
             player_score += 1
         }else if (result == 'computerWin'){
-            computer_score += 1
-        }else if (result == 'invalid'){
-            round -= 1
-        }
-        round += 1
-    }
-    console.log('Your Score: ', player_score)
-    console.log('Computer Score: ', computer_score)
-    if (player_score > computer_score){
-        console.log('Player wins!')
-    }else if (player_score < computer_score){
-        console.log('Computer wins!')
-    }else{
-        console.log('A draw!')
-    }
+            computer_score += 1}
+        score1.textContent = 'Your Score: ' + player_score 
+        score2.textContent = 'Computer Score: ' + computer_score
+        container.appendChild(score1)
+        container.appendChild(score2)
+    });
+});
 
-}
 
-playGame()
+
